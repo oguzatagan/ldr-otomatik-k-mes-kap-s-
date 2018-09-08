@@ -1,11 +1,7 @@
 #include <SimpleTimer.h>
 
-int ledPinTest = 13;
-int lightSensorPin = 0;
-int motorDownSensor = A1;
-int motorUpSensor = A2;
-int motorDown = 11;
-int motorUp = 12;
+int lightSensorPin = 1;
+int motor = 2;
 int lightSensor;
 int lightState;
 
