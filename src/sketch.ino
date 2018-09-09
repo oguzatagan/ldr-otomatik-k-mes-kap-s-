@@ -42,6 +42,8 @@ void motorGoUp(){
     delay(100);
   } else {
     digitalWrite(motorUp, HIGH);
+    delay(1000);
+    digitalWrite(motorUp, LOW);
     Serial.println("Motor go up!");
     delay(100);
   }
@@ -54,6 +56,8 @@ void motorGoDown(){
     delay(100);
   } else {
     digitalWrite(motorDown, HIGH);
+    delay(1000);
+    digitalWrite(motorDown, LOW);
     Serial.println("Motor go down!");
     delay(100);
   }
