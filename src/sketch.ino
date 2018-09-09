@@ -1,23 +1,18 @@
 #include <SimpleTimer.h>
 
-int ledPinTest = 13;
-int lightSensorPin = 0;
-int motorDownSensor = A1;
-int motorUpSensor = A2;
-int motorDown = 11;
-int motorUp = 12;
+int lightSensorPin = 1;
+int motorDown = 2;
+int motorUp = 3;
 int lightSensor;
 int lightState;
+boolean doorstate = 0; //kapı açıksa 1, kapalıysa 0
 
 SimpleTimer chickenCoopTimer;
 
 void setup(){
   pinMode(lightSensorPin, INPUT);
-  pinMode(motorDownSensor, INPUT);
-  pinMode(motorUpSensor, INPUT);
   pinMode(motorDown, OUTPUT);
   pinMode(motorUp, OUTPUT);
-  pinMode(ledPinTest, OUTPUT);
   Serial.begin(9600);
   chickenCoopTimer.setInterval(6000, howIsLight);      // read the lightSensor every
 }
@@ -29,19 +24,19 @@ void loop(){
     Serial.println("motor goes up!");
     digitalWrite(motorDown, LOW);
     motorGoUp();
+    doorstate = 1;
     Serial.println("motor is up!");
   } else {
     Serial.println("motor goes down!");
     digitalWrite(motorUp, LOW);
     motorGoDown();
+    doorstate = 0;
     Serial.println("motor is down!");
   }
 }
 
 void motorGoUp(){
-  Serial.print("\nI'm in motorUp: motorUpSensor = ");
-  Serial.println(analogRead(motorUpSensor));
-  if (analogRead(motorUpSensor) <= 60) {
+  if (doorstate == 1) {
     digitalWrite(motorUp, LOW);
     Serial.println("Motor is up !");
     delay(100);
@@ -53,9 +48,7 @@ void motorGoUp(){
 }
 
 void motorGoDown(){
-  Serial.print("\nI'm in motorDown: motorDownSensor = ");
-  Serial.println(analogRead(motorDownSensor));
-  if (analogRead(motorDownSensor) <= 60) {
+  if (doorstate == 0) {
     digitalWrite(motorDown, LOW);
     Serial.println("Motor is down !");
     delay(100);
